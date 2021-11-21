@@ -75,5 +75,5 @@ class BookContextProvider extends React.Component {
 
 export default BookContextProvider;
 
-console.log(BookContext);
+
  

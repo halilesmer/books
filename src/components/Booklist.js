@@ -1,52 +1,52 @@
 import React from "react";
-import './Booklist.css';
-import Book from "./Book.js";
-import { BookContext } from "../BookContext";
+import "./BookList.css";
+import Book from "./Book";
+import { BookContext } from "../BookContext.js";
+import { ThemeContext } from "../ThemeContext.js";
 
-class Booklist extends React.Component {
-  
-  
+class BookList extends React.Component {
   render() {
     return (
-      <BookContext.Consumer>
-        {(value) => {
+      <ThemeContext.Consumer>
+        {(contextTheme) => {
           return (
-            <section className="page-section bg-light" id="portfolio">
-              <div className="container">
-                <div className="text-center">
-                  <h2 className="section-heading text-uppercase">BookFolio</h2>
-                  <h3 className="section-subheading text-muted">
-                    Lorem ipsum dolor sit amet consectetur.
-                  </h3>
-                </div>
-                <div className="row">
-                  {value.books.map((book, i) => {
-                    return <Book book={book} key={i} />;
-                  })}
-                </div>
-              </div>
-            </section>
-          );
+            <BookContext.Consumer>
+            
+              {(contextBook) => {
+                const { isDarkTheme, dark, light } = contextTheme;
+                const { books } = contextBook;
+                const theme = isDarkTheme ? dark : light;
+
+                return (
+                  <section
+                    className="page-section"
+                    style={{ background: theme.bg, color: theme.txt }}
+                    id="portfolio"
+                  >
+                    <div className="container">
+                      <div className="text-center">
+                        <h2 className="section-heading text-uppercase">
+                          BookFolio
+                        </h2>
+                        <h3 className="section-subheading text-muted">
+                          Lorem ipsum dolor sit amet consectetur.
+                        </h3>
+                      </div>
+                      <div className="row">
+                        {books.map((book, i) => {
+                          return <Book book={book} key={i} />;
+                        })}
+                      </div>
+                    </div>
+                  </section>
+                );
+              }}
+            </BookContext.Consumer>
+          
+          )
         }}
-      </BookContext.Consumer>
+      </ThemeContext.Consumer>
     );
   }
 }
-export default Booklist;
-
-
-/* <section className="page-section bg-light" id="portfolio">
-        <div className="container">
-          <div className="text-center">
-            <h2 className="section-heading text-uppercase">BookFolio</h2>
-            <h3 className="section-subheading text-muted">
-              Lorem ipsum dolor sit amet consectetur.
-            </h3>
-          </div>
-          <div className="row">
-            {books.map((book, i) => {
-              return <Book book={book} key={i} />;
-            })}
-          </div>
-        </div>
-      </section> */
+export default BookList;
