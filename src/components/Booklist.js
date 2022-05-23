@@ -16,44 +16,39 @@ class BookList extends React.Component {
                 const { books } = contextBook;
                 const theme = isDarkTheme ? dark : light;
 
-                return (<>
-                  <section
-                  className="page-section"
-                  style={{ background: theme.bg, color: theme.txt }}
-                  id="portfolio"
-                  >
-                  <div className="container">
-                  <div className="text-center">
-                  <button
-                          type="button"
-                          className="btn btn-info"
-                          style={{ marginBottom: "2rem" }}
-                          onClick={changeTheme}
-                        >
-                          Change Theme
-                        </button>
-                        <h2 className="section-heading text-uppercase">
-                          BookFolio
-                        </h2>
-                        <h3 className="section-subheading text-muted">
-                          Lorem ipsum dolor sit amet consectetur.
-                        </h3>
-                        
-
-
-
-
-
-
+                return (
+                  <>
+                    <section
+                      className="page-section"
+                      style={{ background: theme.bg, color: theme.txt }}
+                      id="portfolio"
+                    >
+                      <div className="container">
+                        <div className="text-center">
+                          <button
+                            type="button"
+                            className="btn btn-info"
+                            style={{ marginBottom: "2rem" }}
+                            onClick={changeTheme}
+                          >
+                            Change Theme
+                          </button>
+                          <h2 className="section-heading text-uppercase">
+                            BookFolio
+                          </h2>
+                          <h3 className="section-subheading text-muted">
+                            Lorem ipsum dolor sit amet consectetur.
+                          </h3>
+                        </div>
+                        <div className="row">
+                          {books.map((book, i) => {
+                            return <Book book={book} key={i} />;
+                          })}
+                        </div>
                       </div>
-                      <div className="row">
-                        {books.map((book, i) => {
-                          return <Book book={book} key={i} />;
-                        })}
-                      </div>
-                    </div>
-                  </section>
-                </>);
+                    </section>
+                  </>
+                );
               }}
             </BookContext.Consumer>
           );
@@ -63,3 +58,5 @@ class BookList extends React.Component {
   }
 }
 export default BookList;
+
+
